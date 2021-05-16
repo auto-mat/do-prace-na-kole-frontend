@@ -1,0 +1,26 @@
+version: 2
+jobs:
+  build:
+    working_directory: /home/aplikace
+    docker:
+      - image: node:buster
+
+    steps:
+      - checkout
+      - run: mkdir build; mkdir dist
+      - run: echo "$(date +%Y).${CIRCLE_BUILD_NUM} $(git rev-parse --short HEAD)" > version.txt
+      - run: npm install --dev
+      - run: npm run build
+      - run: mv build dist/$(date +%Y).${CIRCLE_BUILD_NUM}
+      - aws-s3/sync:
+          arguments: |
+            --acl public-read \
+            --cache-control "max-age=86400"
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-region: eu-west
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          from: dist
+          to: 's3://dpnk-frontend/'
+
+orbs:
+  aws-s3: circleci/aws-s3@x.y

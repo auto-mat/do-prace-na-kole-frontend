@@ -11,6 +11,7 @@ jobs:
       - run: echo "$(date +%Y).${CIRCLE_BUILD_NUM} $(git rev-parse --short HEAD)" > version.txt
       - run: npm ci
       - run: npm run build
+      - run: mv frontend/img dist/$(date +%Y).${CIRCLE_BUILD_NUM}/img
       - run: mv build dist/$(date +%Y).${CIRCLE_BUILD_NUM}
       - aws-s3/sync:
           arguments: |

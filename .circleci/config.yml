@@ -17,7 +17,7 @@ jobs:
             --acl public-read \
             --cache-control "max-age=86400"
           aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-region: eu-west
+          aws-region: AWS_REGION
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           from: dist
           to: 's3://dpnk-frontend/'

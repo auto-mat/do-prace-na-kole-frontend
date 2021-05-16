@@ -13,7 +13,7 @@ jobs:
       - run: npm run build
       - run: mkdir -p dist/$(date +%Y).${CIRCLE_BUILD_NUM}/
       - run: mv frontend/img dist/$(date +%Y).${CIRCLE_BUILD_NUM}/img
-      - run: mv build dist/$(date +%Y).${CIRCLE_BUILD_NUM}
+      - run: mv build/* dist/$(date +%Y).${CIRCLE_BUILD_NUM}
       - aws-s3/sync:
           arguments: |
             --acl public-read \

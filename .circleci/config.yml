@@ -23,4 +23,4 @@ jobs:
           to: 's3://dpnk-frontend/'
 
 orbs:
-  aws-s3: circleci/aws-s3@x.y
+  aws-s3: circleci/aws-s3

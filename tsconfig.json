@@ -7,9 +7,5 @@
             "es5",
             "dom"
         ]
-    },
-    "exclude": [
-        "static",
-        "apps"
-    ]
+    }
 }

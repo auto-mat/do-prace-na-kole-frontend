@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run: mkdir build; mkdir dist
       - run: echo "$(date +%Y).${CIRCLE_BUILD_NUM} $(git rev-parse --short HEAD)" > version.txt
-      - run: npm install --dev
+      - run: npm ci
       - run: npm run build
       - run: mv build dist/$(date +%Y).${CIRCLE_BUILD_NUM}
       - aws-s3/sync:

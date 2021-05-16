@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:css": "less-watch-compiler frontend/less dist/css --run-once",
+    "build:css": "less-watch-compiler frontend/less build/css --run-once",
     "build:ts": "npx webpack --mode='production'",
     "build": "npm run build:css & npm run build:ts",
-    "watch": "npx webpack --watch & less-watch-compiler frontend/less dist/css"
+    "watch": "npx webpack --watch & less-watch-compiler frontend/less build/css"
   },
   "author": "Auto-mat z.s.",
   "license": "GPL-3.0-or-later",
@@ -66,6 +66,7 @@
     "style-loader": "^1.1.3",
     "timeago": "^1.6.7",
     "ts-loader": "^6.2.1",
+    "ts-polyfill": "^3.8.2",
     "webpack": "^4.42.0",
     "yarn": "^1.22.0"
   },

@@ -40,7 +40,7 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js'],
     },
     output: {
-        path: path.resolve(__dirname, 'build/css')
+        path: path.resolve(__dirname, 'build/js')
     },
     mode: "development",
 }

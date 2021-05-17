@@ -1,2 +1,2 @@
 #!/bin/bash
-./node_modules/http-server/bin/http-server build/ --cors
+./node_modules/http-server/bin/http-server development-web-root/ --cors

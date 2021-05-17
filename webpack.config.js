@@ -13,6 +13,7 @@ module.exports = {
         leaflet_settings: './frontend/ts/leaflet_settings.ts',
         calendar: './frontend/ts/calendar.ts',
         table: './frontend/ts/table.ts',
+        views: './frontend/ts/views.ts',
     },
     module: {
         rules: [

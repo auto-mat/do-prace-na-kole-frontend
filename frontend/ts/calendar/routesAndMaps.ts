@@ -105,6 +105,7 @@ export function load_dropozones() {
     for (var cm_slug in commute_modes) {
         let cm = commute_modes[cm_slug];
         if (cm.distance_important) {
+            $(`#gpx_upload_${cm_slug}`).addClass("dropzone");
             Maps.dzs[cm_slug]= $(`#gpx_upload_${cm_slug}`).dropzone({
                 uploadMultiple: false,
                 paramName: "gpx",

@@ -22,6 +22,8 @@ const strings = new LocalizedStrings(
             enter_distance_fist: "You need to enter the distance you traveled",
             min_distance_error: "You cannot enter trips less than ",
             min_duration_error: "You cannot enter trips less than ",
+            cal_heading: "Své jízdy si můžete zapsat do kalendáře nebo zadat pomocí tabulky. Nezapomeňte, že si své jízdy můžete zapisovat pouze { days } dní zpětně. ",
+
         },
         cs:{
             save: "Uložit",

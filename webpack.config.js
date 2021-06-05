@@ -1,10 +1,18 @@
 const path = require('path');
 const CompressionPlugin = require('compression-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
+
 
 module.exports = {
-    plugins: [new CompressionPlugin()],
+    plugins: [
+        new CompressionPlugin(),
+        new VueLoaderPlugin()
+    ],
     resolve: {
-        extensions: ["", ".webpack.js", ".web.js", ".js", ".ts"]
+        extensions: ["", ".webpack.js", ".web.js", ".js", ".ts", ".tsx", ".vue"],
+        alias: {
+            'vue$': 'vue/dist/vue.common.js'
+        }
     },
     entry: {
         map: './frontend/ts/map.ts',
@@ -34,11 +42,12 @@ module.exports = {
             {
                 test: /\.less$/i,
                 use: ['style-loader', 'css-loader', 'less-loader'],
+            },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
             }
         ],
-    },
-    resolve: {
-        extensions: ['.ts', '.tsx', '.js'],
     },
     output: {
         path: path.resolve(__dirname, 'build/js')

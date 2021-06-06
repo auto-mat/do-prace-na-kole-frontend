@@ -23,42 +23,16 @@
             </div>
         </div>
         <div v-if="show_colleague_trips">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <div v-if="!rest.colleague_trips__loaded">
-                                Načítá se...
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <a v-if="rest.colleague_trips__csv_datalink" v-bind:href="rest.colleague_trips__csv_datalink"> <i class="fas fa-file-csv"></i> CSV</a>
-                        </div>
-                    </div>
-                    <div v-if="rest.colleague_trips">
-                        <div v-for="trip in rest.colleague_trips" class="row">
-                            <div class="col">
-                            {{trip.trip_date}}
-                            </div>
-                            <div class="col">
-                            {{trip.direction}}
-                            </div>
-                            <div class="col">
-                                {{trip.commuteMode}}
-                            </div>
-                            <div class="col">
-                                {{trip.distanceMeters / 1000}}
-                            </div>
-                            <div class="col">
-                                {{trip.user}}
-                            </div>
-                            <div class="col">
-                                {{trip.id}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div v-if="!rest.colleague_trips__loaded">
+                Načítá se...
             </div>
+            <a v-if="rest.colleague_trips__csv_datalink" v-bind:href="rest.colleague_trips__csv_datalink"> <i class="fas fa-file-csv"></i> CSV</a>
+            <tripstable
+                v-if="rest.colleague_trips && rest.commute_modes && rest.this_campaign"
+                v-bind:trips="rest.colleague_trips"
+                v-bind:days="rest.this_campaign__competition_phase_days"
+                v-bind:commute_modes="rest.commute_modes"
+            ></tripstable>
         </div>
         <div class="card" v-if="multiple_subsidiaries">
             <div class="card-title">
@@ -86,6 +60,7 @@
 <script>
 import round from 'vue-round-filter';
 import statscard from './statscard.vue';
+import tripstable from './tripstable.vue';
 import CSV from 'csv.js';
 
 export default {
@@ -95,12 +70,16 @@ export default {
             colleague_trips: false,
             colleague_trips__loaded: false,
             colleague_trips__csv_datalink: false,
+            commute_modes: false,
+            this_campaign: false,
+            this_campaign__competition_phase_days: false,
         },
         show_colleague_trips: false,
     }},
     filters: {round,},
     components: {
         statscard,
+        tripstable,
     },
     mounted() {
         var vm = this;
@@ -134,6 +113,28 @@ export default {
         toggle_trips() {
             this.show_colleague_trips = !this.show_colleague_trips;
             $.getJSON('/rest/colleague_trips', this.load_trips);
+            var vm = this;
+            $.getJSON('/rest/commute_mode', function(data){
+                vm.rest.commute_modes = data.results;
+            });
+            $.getJSON('/rest/this_campaign', function(data){
+                var competition_phase = null;
+                for (var phasei in data.results[0].phase_set) {
+                    competition_phase = data.results[0].phase_set[phasei];
+                    if(competition_phase.phase_type == "competition") {
+                        break;
+                    }
+                }
+                var date = new Date(competition_phase.date_from);
+                var end_date = new Date(competition_phase.date_to);
+                var days = [];
+                while (!(date - end_date == 0)) {
+                    date.setDate(date.getDate() + 1)
+                    days.push(""+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1))
+                }
+                vm.rest.this_campaign__competition_phase_days = days;
+                vm.rest.this_campaign = data.results[0];
+            });
         }
     }
 }

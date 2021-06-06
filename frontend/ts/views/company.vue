@@ -76,6 +76,7 @@
                     v-bind:trips="subsidiary.eco_trip_count"
                     v-bind:trips_base="subsidiary.working_rides_base_count"
                     v-bind:km="subsidiary.dinstance"
+                    class="subsidiary_stats_card"
                 ></statscard>
             </div>
         </div>
@@ -145,5 +146,8 @@ export default {
 b {
     margin-left: 3px;
     margin-right: 3px;
+}
+.subsidiary_stats_card{
+    margin-bottom: 20px;
 }
 </style>

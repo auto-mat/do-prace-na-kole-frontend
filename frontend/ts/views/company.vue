@@ -32,31 +32,29 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <a v-if="rest.colleague_trips__csv_datalink" v-bind:href="rest.colleague_trips__csv_datalink">CSV</a>
+                            <a v-if="rest.colleague_trips__csv_datalink" v-bind:href="rest.colleague_trips__csv_datalink"> <i class="fas fa-file-csv"></i> CSV</a>
                         </div>
-
                     </div>
                     <div v-if="rest.colleague_trips">
-                        <div v-for="trip in rest.colleague_trips">
-                            <p>
+                        <div v-for="trip in rest.colleague_trips" class="row">
+                            <div class="col">
                             {{trip.trip_date}}
-                            </p>
-                            <p>
+                            </div>
+                            <div class="col">
                             {{trip.direction}}
-                            </p>
-                            <p>
+                            </div>
+                            <div class="col">
                                 {{trip.commuteMode}}
-                            </p>
-                            <p>
+                            </div>
+                            <div class="col">
                                 {{trip.distanceMeters / 1000}}
-                            </p>
-                            <p>
+                            </div>
+                            <div class="col">
                                 {{trip.user}}
-                            </p>
-                            <p>
+                            </div>
+                            <div class="col">
                                 {{trip.id}}
-                            </p>
-                            <hr/>
+                            </div>
                         </div>
                     </div>
                 </div>

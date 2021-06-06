@@ -1,7 +1,7 @@
 import LocalizedStrings from 'localized-strings';
 import * as Dropzone from 'dropzone';
 const dz = Dropzone
-dz.autoDiscover = false;
+dz.default.autoDiscover = false;
 
 const strings = new LocalizedStrings(
     {
@@ -24,11 +24,12 @@ const strings = new LocalizedStrings(
 );
 
 export function load_strings_gpx(): typeof strings {
-    Dropzone.prototype.defaultOptions.dictDefaultMessage = strings.dictDefaultMessage;
-    Dropzone.prototype.defaultOptions.dictFallbackMessage = strings.dictFallbackMessage;
-    Dropzone.prototype.defaultOptions.dictFallbackText = strings.dictFallbackText;
-    Dropzone.prototype.defaultOptions.dictFileTooBig = strings.dictFileTooBig;
-    Dropzone.prototype.defaultOptions.dictInvalidFileType = strings.dictInvalidFileType;
-    Dropzone.prototype.defaultOptions.dictResponseError = strings.dictResponseError;
+    console.log(dz);
+    dz.default.prototype.defaultOptions.dictDefaultMessage = strings.dictDefaultMessage;
+    dz.default.prototype.defaultOptions.dictFallbackMessage = strings.dictFallbackMessage;
+    dz.default.prototype.defaultOptions.dictFallbackText = strings.dictFallbackText;
+    dz.default.prototype.defaultOptions.dictFileTooBig = strings.dictFileTooBig;
+    dz.default.prototype.defaultOptions.dictInvalidFileType = strings.dictInvalidFileType;
+    dz.default.prototype.defaultOptions.dictResponseError = strings.dictResponseError;
     return strings;
 }

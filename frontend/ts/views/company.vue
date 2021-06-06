@@ -25,8 +25,16 @@
         <div v-if="show_colleague_trips">
             <div class="card">
                 <div class="card-body">
-                    <div v-if="!rest.colleague_trips__loaded">
-                        Načítá se...
+                    <div class="row">
+                        <div class="col">
+                            <div v-if="!rest.colleague_trips__loaded">
+                                Načítá se...
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <a v-if="rest.colleague_trips__csv_datalink" v-bind:href="rest.colleague_trips__csv_datalink">CSV</a>
+                        </div>
+
                     </div>
                     <div v-if="rest.colleague_trips">
                         <div v-for="trip in rest.colleague_trips">
@@ -79,6 +87,7 @@
 <script>
 import round from 'vue-round-filter';
 import statscard from './statscard.vue';
+import CSV from 'csv.js';
 
 export default {
     data () { return {
@@ -86,6 +95,7 @@ export default {
             my_company: false,
             colleague_trips: false,
             colleague_trips__loaded: false,
+            colleague_trips__csv_datalink: false,
         },
         show_colleague_trips: false,
     }},
@@ -106,6 +116,9 @@ export default {
         }
     },
     methods: {
+        mk_csv() {
+            this.rest.colleague_trips__csv_datalink = 'data:application/csv;charset=utf-8,'+ encodeURI(CSV.encode(this.rest.colleague_trips));
+        },
         load_trips(data){
             if (this.rest.colleague_trips) {
                 this.rest.colleague_trips = this.rest.colleague_trips.concat(data.results);
@@ -116,6 +129,7 @@ export default {
                 $.getJSON(data.next, this.load_trips);
             } else {
                 this.rest.colleague_trips__loaded = true;
+                this.mk_csv();
             }
         },
         toggle_trips() {

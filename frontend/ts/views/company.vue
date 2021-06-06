@@ -25,6 +25,9 @@
         <div v-if="show_colleague_trips">
             <div class="card">
                 <div class="card-body">
+                    <div v-if="!rest.colleague_trips__loaded">
+                        Načítá se...
+                    </div>
                     <div v-if="rest.colleague_trips">
                         <div v-for="trip in rest.colleague_trips">
                             <p>
@@ -42,11 +45,11 @@
                             <p>
                                 {{trip.user}}
                             </p>
+                            <p>
+                                {{trip.id}}
+                            </p>
                             <hr/>
                         </div>
-                    </div>
-                    <div v-else>
-                        Načítá se...
                     </div>
                 </div>
             </div>
@@ -82,9 +85,9 @@ export default {
         rest: {
             my_company: false,
             colleague_trips: false,
+            colleague_trips__loaded: false,
         },
         show_colleague_trips: false,
-        ctl: false,
     }},
     filters: {round,},
     components: {
@@ -103,13 +106,21 @@ export default {
         }
     },
     methods: {
+        load_trips(data){
+            if (this.rest.colleague_trips) {
+                this.rest.colleague_trips = this.rest.colleague_trips.concat(data.results);
+            } else {
+                this.rest.colleague_trips = data.results;
+            }
+            if(data.next) {
+                $.getJSON(data.next, this.load_trips);
+            } else {
+                this.rest.colleague_trips__loaded = true;
+            }
+        },
         toggle_trips() {
             this.show_colleague_trips = !this.show_colleague_trips;
-            var vm = this;
-            $.getJSON('/rest/colleague_trips',
-                      function(data) {
-                          vm.rest.colleague_trips = data.results;
-            });
+            $.getJSON('/rest/colleague_trips', this.load_trips);
         }
     }
 }

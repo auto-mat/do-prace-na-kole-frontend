@@ -3,7 +3,12 @@
         <template #cell()="cell">
             <div v-if="cell.value.commute_mode_icon" class="text-nowrap">
                 <img v-bind:src="cell.value.commute_mode_icon" class="commute_mode_icon" />
-                {{cell.value.distanceMeters / 1000 | round(1)}} Km
+                <span v-if="cell.value.distance_important">
+                    {{cell.value.distanceMeters / 1000 | round(1)}} Km
+                </span>
+                <span v-if="cell.value.duration_important">
+                    {{cell.value.durationSeconds / 60 | round}} m
+                </span>
             </div>
             <div v-else class="text-nowrap">{{cell.value}}</div>
         </template>
@@ -69,6 +74,8 @@ export default {
                     var dir = trip.direction == "trip_to" ? "→" : "←";
                     users[trip.user_attendance]._cellVariants[trip.trip_date + dir] = "success";
                     trip.commute_mode_icon = cms[trip.commuteMode].icon;
+                    trip.duration_important = cms[trip.commuteMode].duration_important;
+                    trip.distance_important = cms[trip.commuteMode].distance_important;
                     users[trip.user_attendance][trip.trip_date + dir] = trip;
                 }
             }

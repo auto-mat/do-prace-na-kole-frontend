@@ -10,11 +10,22 @@ import round from 'vue-round-filter';
 export default {
     computed: {
         fields() {
-            var fields = ["subsidiary", "team", "user"];
+            var fields = [
+                {
+                    key: "subsidiary",
+                    label: "Pobočka",
+                },
+                {
+                    key: "team",
+                    label: "Tým",
+                },
+                {
+                    key: "user",
+                    label: "Účastník",
+                },
+            ];
             for (var dayi in this.days) {
                 var date = new Date(this.days[dayi]);
-                console.log(this.days[dayi]);
-                console.log(date);
                 fields.push({
                     key: this.days[dayi],
                     label: " " + date.getDate() + "." + (date.getMonth() + 1)

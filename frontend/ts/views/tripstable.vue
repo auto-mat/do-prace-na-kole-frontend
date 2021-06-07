@@ -1,13 +1,11 @@
 <template>
-    <b-table small :fields="fields" :items="users" responsive="true" small="true" class="overflow-auto">
-        <template #cell(subsidiary)="cell">
-            <div class="text-nowrap">{{cell.value}}</div>
-        </template>
-        <template #cell(team)="cell">
-            <div class="text-nowrap">{{cell.value}}</div>
-        </template>
-        <template #cell(user)="cell">
-            <div class="text-nowrap">{{cell.value}}</div>
+    <b-table small :fields="fields" :items="users" responsive=true class="overflow-auto">
+        <template #cell()="cell">
+            <div v-if="cell.value.commute_mode_icon" class="text-nowrap">
+                <img v-bind:src="cell.value.commute_mode_icon" class="commute_mode_icon" />
+                {{cell.value.distanceMeters / 1000 | round(1)}} Km
+            </div>
+            <div v-else class="text-nowrap">{{cell.value}}</div>
         </template>
     </b-table>
 </template>
@@ -35,8 +33,12 @@ export default {
             for (var dayi in this.days) {
                 var date = new Date(this.days[dayi]);
                 fields.push({
-                    key: this.days[dayi],
-                    label: " " + date.getDate() + "." + (date.getMonth() + 1)
+                    key: this.days[dayi] + "→",
+                    label: " " + date.getDate() + "." + (date.getMonth() + 1) + "→"
+                });
+                fields.push({
+                    key: this.days[dayi] + "←",
+                    label: "←"
                 });
             }
             return fields;
@@ -56,15 +58,18 @@ export default {
                     users[trip.user_attendance] = {"_cellVariants": {}};
                     for (var dayi in this.days) {
                         var day = this.days[dayi];
-                        users[trip.user_attendance][day] = "";
+                        users[trip.user_attendance][day+"→"] = "";
+                        users[trip.user_attendance][day+"←"] = "";
                     }
                     users[trip.user_attendance]["subsidiary"] = trip.subsidiary
                     users[trip.user_attendance]["team"] = trip.team
                     users[trip.user_attendance]["user"] = trip.user
                 }
-                users[trip.user_attendance][trip.trip_date] = trip.commuteMode;
                 if (cms[trip.commuteMode].eco && cms[trip.commuteMode].does_count) {
-                    users[trip.user_attendance]._cellVariants[trip.trip_date] = "success"
+                    var dir = trip.direction == "trip_to" ? "→" : "←";
+                    users[trip.user_attendance]._cellVariants[trip.trip_date + dir] = "success";
+                    trip.commute_mode_icon = cms[trip.commuteMode].icon;
+                    users[trip.user_attendance][trip.trip_date + dir] = trip;
                 }
             }
             var user_array = [];
@@ -82,4 +87,7 @@ export default {
 </script>
 
 <style>
+.commute_mode_icon {
+    height: 1em;
+}
 </style>

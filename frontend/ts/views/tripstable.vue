@@ -24,12 +24,17 @@ export default {
         },
         users() {
             var users = {};
+            var cms = {};
+            for (var cmi in this.commute_modes) {
+                var cm = this.commute_modes[cmi];
+                cms[cm.slug] = cm;
+            }
             for (var tripi in this.trips) {
                 var trip = this.trips[tripi];
                 var date = new Date(trip.trip_date);
                 trip.trip_date = ""+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate())
                 if(!(trip.user_attendance in users)) {
-                    users[trip.user_attendance] = {};
+                    users[trip.user_attendance] = {"_cellVariants": {}};
                     for (var dayi in this.days) {
                         var day = this.days[dayi];
                         users[trip.user_attendance][day] = "";
@@ -39,6 +44,9 @@ export default {
                     users[trip.user_attendance]["user"] = trip.user
                 }
                 users[trip.user_attendance][trip.trip_date] = trip.commuteMode;
+                if (cms[trip.commuteMode].eco && cms[trip.commuteMode].does_count) {
+                    users[trip.user_attendance]._cellVariants[trip.trip_date] = "success"
+                }
             }
             var user_array = [];
             for (var userk in users) {

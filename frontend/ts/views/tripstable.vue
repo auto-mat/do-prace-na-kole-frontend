@@ -1,6 +1,14 @@
 <template>
-    <b-table small :fields="fields" :items="users" responsive="sm" class="overflow-auto">
-
+    <b-table small :fields="fields" :items="users" responsive="true" small="true" class="overflow-auto">
+        <template #cell(subsidiary)="cell">
+            <div class="text-nowrap">{{cell.value}}</div>
+        </template>
+        <template #cell(team)="cell">
+            <div class="text-nowrap">{{cell.value}}</div>
+        </template>
+        <template #cell(user)="cell">
+            <div class="text-nowrap">{{cell.value}}</div>
+        </template>
     </b-table>
 </template>
 

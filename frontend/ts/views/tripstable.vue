@@ -12,7 +12,13 @@ export default {
         fields() {
             var fields = ["subsidiary", "team", "user"];
             for (var dayi in this.days) {
-                fields.push(this.days[dayi]);
+                var date = new Date(this.days[dayi]);
+                console.log(this.days[dayi]);
+                console.log(date);
+                fields.push({
+                    key: this.days[dayi],
+                    label: " " + date.getDate() + "." + (date.getMonth() + 1)
+                });
             }
             return fields;
         },
@@ -20,6 +26,8 @@ export default {
             var users = {};
             for (var tripi in this.trips) {
                 var trip = this.trips[tripi];
+                var date = new Date(trip.trip_date);
+                trip.trip_date = ""+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate())
                 if(!(trip.user_attendance in users)) {
                     users[trip.user_attendance] = {};
                     for (var dayi in this.days) {
@@ -30,13 +38,14 @@ export default {
                     users[trip.user_attendance]["team"] = trip.team
                     users[trip.user_attendance]["user"] = trip.user
                 }
-                users[trip.user_attendance][trip.trip_date] = trip;
+                users[trip.user_attendance][trip.trip_date] = trip.commuteMode;
             }
             var user_array = [];
             for (var userk in users) {
                 var user = users[userk];
                 user_array.push(user);
             }
+            console.log(user_array)
             return user_array;
         }
     },

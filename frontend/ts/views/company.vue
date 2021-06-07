@@ -130,7 +130,7 @@ export default {
                 var days = [];
                 while (!(date - end_date == 0)) {
                     date.setDate(date.getDate() + 1)
-                    days.push(""+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1))
+                    days.push(""+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()))
                 }
                 vm.rest.this_campaign__competition_phase_days = days;
                 vm.rest.this_campaign = data.results[0];

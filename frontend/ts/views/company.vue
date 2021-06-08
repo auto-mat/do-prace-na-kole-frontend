@@ -28,7 +28,7 @@
             </div>
             <a v-if="rest.colleague_trips__csv_datalink" v-bind:href="rest.colleague_trips__csv_datalink"> <i class="fas fa-file-csv"></i> CSV</a>
             <tripstable
-                v-if="rest.colleague_trips && rest.commute_modes && rest.this_campaign"
+                v-if="rest.colleague_trips__loaded && rest.commute_modes && rest.this_campaign"
                 v-bind:trips="rest.colleague_trips"
                 v-bind:days="rest.this_campaign__competition_phase_days"
                 v-bind:commute_modes="rest.commute_modes"

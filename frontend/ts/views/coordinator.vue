@@ -4,6 +4,7 @@
     >
         <div v-for="city in rest.coordinators.city">
             <statscard
+                v-bind:icon_url="city_url"
                 v-bind:name="city.name"
                 v-bind:trips="city.eco_trip_count"
                 v-bind:trips_base="city.working_rides_base_count"
@@ -31,6 +32,7 @@ import statscard from './statscard.vue';
 
 export default {
     data () { return {
+        city_url: window.frontend_url + "img/city-solid.png",
         rest: {
             coordinators: {
                 city: false,

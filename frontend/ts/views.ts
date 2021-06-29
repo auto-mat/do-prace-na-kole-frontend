@@ -26,6 +26,20 @@ function load_version_string() {
     });
 }
 
+
+function load_menus() {
+    $.getJSON('/rest/userattendance', function(data){
+        var ua = data.results[0];
+        if (ua.is_coordinator) {
+            $(".dynamic-menu").html(
+                "<li><a style='display: list-item;' href=\"./coordinators\">Městský koordinator</a></li>"
+            );
+        }
+    }
+             );
+}
+
+
 $(document).ready(function() {
     const router = new VueRouter({
         mode: 'history',
@@ -51,5 +65,8 @@ $(document).ready(function() {
     console.log("Views code initialized.");
     if($(".version").length > 0){
         load_version_string();
+    }
+    if($(".dynamic-menu").length > 0){
+        load_menus();
     }
 });

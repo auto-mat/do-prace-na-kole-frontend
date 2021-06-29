@@ -10,8 +10,8 @@
                 v-bind:km="city.distance"
                 v-bind:co2="city.emissions.co2"
             ></statscard>
-            <p class="download-data">
-                <a v-if="city.data_export_url" v-bind:href="city.data_export_url"> <i class="fas fa-download"></i> Stahnout data o cestách </a>
+            <p class="download-data" v-if="city.data_export_url">
+                <a v-bind:href="city.data_export_url"> <i class="fas fa-download"></i> Stahnout data o cestách </a>
                 <p>
                     Heslo do exportu je <b>{{city.data_export_password}}</b>.
                 </p>

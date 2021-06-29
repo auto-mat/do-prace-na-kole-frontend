@@ -11,13 +11,13 @@
                     </b>
                 </div>
                 <div class="row">
-                    <div class="col-sm">
+                    <div class="col-sm" v-if="frequency">
                         <div class="row">Pravidelnost</div>
                         <div class="row"><b>{{ frequency * 100 | round }}</b></div>
                     </div>
                     <div class="col-sm">
                         <div class="row">Cesty</div>
-                        <div class="row"><b>{{ trips }}</b>/{{ trips_base }}</div>
+                        <div class="row" ><b>{{ trips }}</b><span v-if="trips_base">/{{ trips_base }}</span></div>
                     </div>
                     <div class="col-sm">
                         <div class="row">Km</div>

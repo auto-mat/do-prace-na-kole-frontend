@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Company from "./views/company.vue";
+import Coordinator from "./views/coordinator.vue";
 import { BootstrapVue } from 'bootstrap-vue'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -32,6 +33,8 @@ $(document).ready(function() {
         routes: [
             //@ts-ignore
             { path: '/spolecnost/', component: Company },
+            //@ts-ignore
+            { path: '/coordinators/', component: Coordinator },
         ]
     })
 

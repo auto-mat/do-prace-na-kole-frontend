@@ -32,7 +32,7 @@ function load_menus() {
         var ua = data.results[0];
         if (ua.is_coordinator) {
             $(".dynamic-menu").html(
-                "<li><a style='display: list-item;' href=\"./coordinators\">Městský koordinator</a></li>"
+                "<li><a style='display: list-item;' href=\"/coordinators\">Městský koordinator</a></li>"
             );
         }
     }

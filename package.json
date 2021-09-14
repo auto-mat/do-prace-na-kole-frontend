@@ -40,7 +40,7 @@
     "@types/timeago": "^1.6.0",
     "@vue/component-compiler-utils": "^3.1.2",
     "awesome-typescript-loader": "^5.2.1",
-    "bootstrap": "~3.4.1",
+    "bootstrap": "^4.6",
     "bootstrap-social": "~5.1.1",
     "bootstrap-vue": "^2.21.2",
     "compression-webpack-plugin": "^3.1.0",

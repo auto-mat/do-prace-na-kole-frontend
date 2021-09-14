@@ -79,7 +79,6 @@ h2:empty{
 }
 .btn, input, textarea, .form-control{
   border-radius:0;
-  border:0;
 }
 
 input[type="text"], input[type="password"], input[type="email"], textarea, select, .form-control{
@@ -89,8 +88,10 @@ input[type="text"], input[type="password"], input[type="email"], textarea, selec
 input[type="radio"], input[type="checkbox"]{
   margin-right:.3rem;
 }
+
 .form-control:focus{
   border-color:@quartus;
+  border: 2px !imporant;
   box-shadow: 0 0 0 0 transparent;
 }
 .input-group{

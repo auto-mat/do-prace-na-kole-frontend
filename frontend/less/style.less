@@ -84,16 +84,18 @@ h2:empty{
 input[type="text"], input[type="password"], input[type="email"], textarea, select, .form-control{
   background-color:darken(#fff, 10%);
   border: 0;
+  .form-control:focus{
+      border-color: @quartus;
+      border: 1px;
+      box-shadow: 0 0 0 0 transparent;
+  }
 }
+
+
 input[type="radio"], input[type="checkbox"]{
   margin-right:.3rem;
 }
 
-.form-control:focus{
-  border-color:@quartus;
-  border: 2px !imporant;
-  box-shadow: 0 0 0 0 transparent;
-}
 .input-group{
   background:@lightgrey;
 }
@@ -769,7 +771,10 @@ table.competition_results_table, .tableheading{
           background-color:darken(@neutral, 15%);
       }
   }
-  &.google, &.facebook, &.apple{
+  &.apple {
+      display: none;
+  }
+  &.google, &.facebook{
     color:#000 !important;
     text-decoration:none;
     border-radius: 3px;

@@ -4,7 +4,7 @@ $(function(){
        if ($.validator && !$(this).valid()) return;
 
        var form = $(this);
-       $(this).find('input[type="submit"], button[type="submit"]').each(function (index) {
+       $(this).find('input[type="submit"], button[type="submit"]').each(function () {
            // Create a disabled clone of the submit button
            $(this).clone(false).removeAttr('id').prop('disabled', true).insertBefore($(this));
 
@@ -26,48 +26,36 @@ $(function(){
 });
 
 
-
-
-
 $(function () {
 
-    // Search by company IN button
-    const searchIcoBtn = document.createElement("button");
-    searchIcoBtn.innerText = "Vyhledat";
-    searchIcoBtn.classList.add('btn', 'btn-primary');
-
-    // Toggle Btn
-    const toggleBtn = document.createElement("input")
-    toggleBtn.type = 'checkbox'
-    toggleBtn.classList.add('form-check-input')
+    // Show company name element button
+    const showCompanyNameBtn = document.createElement("button");
+    showCompanyNameBtn.innerText = "Společnost nemá IČO";
+    showCompanyNameBtn.classList.add('btn', 'btn-default');
+    showCompanyNameBtn.style.marginTop = "2px";
+    showCompanyNameBtn.style.display = "block";
 
     // Modal wrapper NODE
     let modalNode = document.getElementById('fm-modal').querySelector('.modal-wrapper');
 
     // Create an observer instance.
-    var observer = new MutationObserver(function (mutations) {
-        console.log(modalNode);
-        let icoInputEl = modalNode.querySelector('#id_ico');
+    var observer = new MutationObserver(function () {
+
+        // Set btn visible on modal load
+        showCompanyNameBtn.style.display = "block";
+
+        // Hide company name input
         let companyDivEl = modalNode.querySelector('#div_id_name');
-        let buttonsEl = modalNode.querySelector('.btn-primary');
-        // console.log('BUT', buttonsEl)
-
-        // Hide company name field
         companyDivEl.style.display = 'none';
-        // Hide original Django form submit button
-        // buttonsEl.style.display = 'none'
 
-        // Replace submit button with toggle button
-        buttonsEl.parentNode.replaceChild(searchIcoBtn, buttonsEl)
+        // Inject "Show company name" Btn
+        modalNode.querySelector('.modal-buttons').appendChild(showCompanyNameBtn);
 
-        // Add toggle Btn
-        modalNode.querySelector('.modal-body').appendChild(toggleBtn)
-
-
-        icoInputEl.addEventListener('input', function (e) {
-            console.log(e.target.value)
+        // Show company name input + hide the Btn
+        showCompanyNameBtn.addEventListener('click', function () {
+            companyDivEl.style.display = 'block';
+            showCompanyNameBtn.style.display = "none";
         })
-
     });
 
     // Pass in the target node, as well as the observer options.

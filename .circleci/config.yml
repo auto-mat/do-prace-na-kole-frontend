@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: /home/aplikace
     docker:
-      - image: node:buster
+      - image: node:16-buster
 
     steps:
       - checkout

@@ -14,7 +14,7 @@
             <div class="col"></div>
             <div class="col-4">
                 <button
-                    class="btn btn-success btn-lg"
+                    class="btn btn-success btn-lg btn-record-ride"
                     v-on:click="toggle_trips"
                 >
                     <i class="fas fa-receipt"></i>
@@ -151,4 +151,11 @@ b {
 .subsidiary_stats_card{
     margin-bottom: 20px;
 }
+.btn-record-ride {
+  color: black !important;
+}
+
+.btn-record-ride:hover {
+  color: white !important;
+ }
 </style>

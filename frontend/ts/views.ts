@@ -48,6 +48,8 @@ $(document).ready(function() {
             //@ts-ignore
             { path: '/spolecnost/', component: Company },
             //@ts-ignore
+            { path: '/en/spolecnost/', component: Company },
+            //@ts-ignore
             { path: '/coordinators/', component: Coordinator },
         ]
     })

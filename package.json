@@ -50,7 +50,7 @@
     "datatables.net": "^1.11.5",
     "datatables.net-bs4": "^1.11.5",
     "datatables.net-buttons": "^1.6.2",
-    "dropzone": "^5.9.3",
+    "dropzone": "^5.7.2",
     "file-loader": "^6.0.0",
     "http-server": "^14.1.0",
     "jquery": "^3.6.0",

@@ -22,6 +22,7 @@ module.exports = {
         calendar: './frontend/ts/calendar.ts',
         table: './frontend/ts/table.ts',
         views: './frontend/ts/views.ts',
+        register_company7: './frontend/ts/register_company.ts',
     },
     module: {
         rules: [
